@@ -66,8 +66,6 @@ export const CreateReel = async (formData: FormData) => {
 
   const video = await uploadVideo(fileVideo);
 
-  console.log(video);
-
   if (!video) return { error: "Invalid Video Try Again!" };
 
   try {
