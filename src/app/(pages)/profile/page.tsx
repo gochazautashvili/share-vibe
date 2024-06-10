@@ -8,8 +8,6 @@ const Card = dynamicImport(() => import("./components/Card"), {
   ),
 });
 
-export const dynamic = "force-static";
-
 const ProfilePage = async () => {
   const posts: UserPostType[] = await getUserPosts();
 

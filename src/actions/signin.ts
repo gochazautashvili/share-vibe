@@ -25,6 +25,8 @@ export const login = async (data: z.infer<typeof SignInSchema>) => {
       confirmPassword,
       redirectTo: HOME_PAGE_URL,
     });
+
+    window.location.reload();
     revalidatePath("/");
   } catch (error) {
     if (error instanceof AuthError) {

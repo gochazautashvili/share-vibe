@@ -5,6 +5,14 @@ import { ReelTypeT } from "@/types/types";
 const ReelsPage = async () => {
   const posts: ReelTypeT[] = await getReels();
 
+  if (posts.length < 1) {
+    return (
+      <h1 className="py-10 text-center text-2xl text-black font-semibold">
+        There Is Reels You Can Add
+      </h1>
+    );
+  }
+
   return (
     <section className="w-full flex flex-col items-center justify-center gap-y-10 py-10">
       {posts.map((post) => {
