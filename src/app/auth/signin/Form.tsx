@@ -35,9 +35,9 @@ const Form = () => {
 
   const DemoSigIn = () => {
     const data = {
-      email: process.env.DEMO_USER_EMAIL as string,
-      password: process.env.DEMO_USER_PASSWORD as string,
-      confirmPassword: process.env.DEMO_USER_CONFIRM_PASSWORD as string,
+      email: "tester@gmail.com",
+      password: "12345678",
+      confirmPassword: "12345678",
     };
 
     startTransition(() => {
@@ -121,7 +121,7 @@ const Form = () => {
         className="uppercase mt-3"
         type="button"
       >
-        {isPending ? "Loading..." : "Sign Demo User"}
+        {isPending ? "Loading..." : "Sign In Demo User"}
       </Button>
     </form>
   );

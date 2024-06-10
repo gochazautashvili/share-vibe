@@ -39,4 +39,3 @@ export const login = async (data: z.infer<typeof SignInSchema>) => {
     throw error;
   }
 };
-
