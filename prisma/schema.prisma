@@ -1,0 +1,108 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model User {
+    id       String @id @unique @default(cuid())
+    username String
+    email    String @unique
+    image_id String
+    password String
+
+    Session Session[]
+    posts   Post[]
+    like    Like[]
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model Session {
+    id           String   @id @default(cuid())
+    userId       String
+    expires      DateTime
+    sessionToken String   @unique
+    user         User     @relation(fields: [userId], references: [id])
+}
+
+enum Type {
+    POST
+    REEL
+}
+
+model Post {
+    id          String @id @unique @default(cuid())
+    title       String
+    description String
+    type        Type
+
+    image        Image?
+    video        Video?
+    like         Like[]
+    likeQuantity Int    @default(0)
+
+    User   User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId String?
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model Like {
+    id String @id @unique @default(cuid())
+
+    Post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+    postId String
+    User   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId String
+
+    @@unique([postId])
+}
+
+model Image {
+    id     String @id @unique @default(cuid())
+    post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+    postId String @unique
+
+    asset_id          String
+    public_id         String
+    version           Int
+    version_id        String
+    signature         String
+    width             Int
+    height            Int
+    format            String
+    resource_type     String
+    created_at        String
+    url               String
+    secure_url        String
+    original_filename String
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model Video {
+    id     String @id @unique @default(cuid())
+    post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+    postId String @unique
+
+    asset_id     String
+    public_id    String
+    version_id   String
+    signature    String
+    width        Int
+    height       Int
+    format       String
+    url          String
+    secure_url   String
+    playback_url String
+
+    duration          Int
+    original_filename String
+}
