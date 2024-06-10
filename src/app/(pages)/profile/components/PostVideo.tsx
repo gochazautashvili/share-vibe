@@ -49,7 +49,7 @@ const PostVideo = ({ src, title }: { src: string; title: string }) => {
       >
         <source src={src} type="video/mp4" />
       </video>
-      <h1 className="font-base text-white opacity-0 absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-black bg-opacity-70 hover:opacity-100 transition-opacity duration-300">
+      <h1 className="font-base text-center text-white opacity-0 absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-black bg-opacity-70 hover:opacity-100 transition-opacity duration-300">
         {title}
       </h1>
     </div>
