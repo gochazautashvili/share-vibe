@@ -60,8 +60,6 @@ model Like {
     postId String
     User   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
     userId String
-
-    @@unique([postId])
 }
 
 model Image {

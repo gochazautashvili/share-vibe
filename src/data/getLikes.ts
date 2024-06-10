@@ -1,10 +1,11 @@
 "use server";
-
 import db from "@/lib/db";
+import getSession from "./getSession";
 
 export const getLikes = async (postId: string) => {
-  const likes = await db.like.findUnique({
-    where: { postId },
+  const session = await getSession();
+  const likes = await db.like.findFirst({
+    where: { postId, userId: session?.user.id },
     select: {
       userId: true,
     },

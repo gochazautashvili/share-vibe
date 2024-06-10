@@ -9,9 +9,10 @@ export const LikePost = async (postId: string) => {
   if (!session?.user.id) return { error: "You Are Not Authorized" };
 
   try {
-    const likes = await db.like.findUnique({
+    const likes = await db.like.findFirst({
       where: {
         postId: postId,
+        userId: session.user.id,
       },
       select: {
         userId: true,
@@ -26,8 +27,9 @@ export const LikePost = async (postId: string) => {
             decrement: 1,
           },
           like: {
-            delete: {
+            deleteMany: {
               postId: postId,
+              userId: session.user.id,
             },
           },
         },
